@@ -1,0 +1,44 @@
+from random import choice
+
+palavras = ['PROGRAMACAO', 'MARINA', 'RACIOCINIO', 'CHUNG', 'PUC', 'PROFE']
+palavra_secreta = choice(palavras)
+tamanho_palavra = len(palavra_secreta)
+
+tentativas = 6
+letras_corretas = ['_'] * tamanho_palavra
+acertos = 0
+
+print('*' * 35)
+print('Seja bem-vindo ao jogo da forca!')
+print('*' * 35)
+print('')
+print('')
+
+while tentativas > 0:
+    acertou = False
+    print(' '.join(letras_corretas))
+    pedir_letra = input('Digite uma letra: ').upper()
+
+    if pedir_letra in letras_corretas:
+        print('Você já tentou essa letra. Tente novamente.')
+        continue
+
+    for i in range(tamanho_palavra):
+        if palavra_secreta[i] == pedir_letra:
+            letras_corretas[i] = pedir_letra
+            acertos += 1
+            acertou = True
+
+    if acertou:
+        print('Letra correta!')
+    else:
+        print('Letra incorreta!')
+        tentativas -= 1
+        print('Tentativas restantes: {}'.format(tentativas))
+
+    if acertos == tamanho_palavra:
+        print('Parabéns! Você acertou a palavra: {}'.format(palavra_secreta))
+        break
+
+if tentativas == 0:
+    print('Você perdeu! A palavra era: {}'.format(palavra_secreta))
